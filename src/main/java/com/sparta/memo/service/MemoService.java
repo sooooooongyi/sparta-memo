@@ -30,6 +30,10 @@ public class MemoService {
         return memoRepository.findAllByOrderByModifiedAtDesc().stream().map(MemoResponseDto::new).toList();
     }
 
+    public List<MemoResponseDto> getMemosByKeyword(String keyword) {
+        return memoRepository.findAllByContentsContainsOrderByModifiedAtDesc(keyword).stream().map(MemoResponseDto::new).toList();
+    }
+
     @Transactional
     public Long updateMemo(Long id, MemoRequestDto requestDto) {
         Memo memo = findMemo(id);
